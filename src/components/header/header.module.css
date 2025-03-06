@@ -1,0 +1,23 @@
+.header_container {
+    background-color: var(--second);
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    color: var(--background);
+    margin-left: 2rem;
+}
+
+.links {
+    display: flex;
+    min-width: 20rem;
+    height: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    list-style: none;
+}
+

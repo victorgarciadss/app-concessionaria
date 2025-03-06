@@ -1,0 +1,17 @@
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: #028eeb;
+  --second: #28292c;
+  --accent: #360ccc;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, button, input {
+  font-family: var(--font-inter);
+}
