@@ -1,0 +1,48 @@
+.main_container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.login_form {
+    background-color: var(--primary);
+    height: 500px;
+    border-radius: 4px;
+    padding: 16px;
+}
+
+.form_content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.user_data_container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.user_data_container > input {
+    height: 30px;
+}
+
+.login_form_button {
+    min-width: 5rem;
+    width: 8rem;
+    height: 50px;
+    border-radius: 8px;
+    background-color: var(--background);
+    color: var(--foreground);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.25rem;
+    border: none;
+}

@@ -15,7 +15,7 @@ export default function Header (): JSX.Element {
                         <Link href="" ><button className={styles.button}>Cadastrar</button></Link>
                     </li>
                     <li>
-                        <Link href="" ><button className={styles.button}>Login</button></Link>
+                        <Link href="/login" ><button className={styles.button}>Login</button></Link>
                     </li>
                 </ul>
             </nav>

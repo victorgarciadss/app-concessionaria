@@ -8,7 +8,15 @@ export default function Home() {
       <Header />
 
       <main className={styles.main_container}>
-        <div>Faça seu login para visualizar as informações e efetuar as informações necessárias</div>
+        <section className={styles.info_section}>
+          <p>Faça seu login para visualizar as informações e efetuar as informações necessárias</p>
+          <Image
+            src={"/assets/image-black-car.webp"}
+            alt="Imagem de carro preto com cenário tecnológico fundo no fundo"
+            width={500}
+            height={300}
+          />
+        </section>
       </main>
     </>
   );
