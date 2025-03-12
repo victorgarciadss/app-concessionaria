@@ -6,6 +6,10 @@ export default function Home() {
   return (
     <>
       <Header />
+
+      <main className={styles.main_container}>
+        <div>Faça seu login para visualizar as informações e efetuar as informações necessárias</div>
+      </main>
     </>
   );
 }

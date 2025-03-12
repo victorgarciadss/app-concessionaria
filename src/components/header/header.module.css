@@ -21,3 +21,13 @@
     list-style: none;
 }
 
+.button {
+    background-color: var(--accent);
+    color: white;
+    min-width: 6.4rem;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+}
+

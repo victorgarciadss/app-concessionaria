@@ -12,10 +12,10 @@ export default function Header (): JSX.Element {
             <nav>
                 <ul className={styles.links}>
                     <li>
-                        <Link href="" ><button>Cadastrar</button></Link>
+                        <Link href="" ><button className={styles.button}>Cadastrar</button></Link>
                     </li>
                     <li>
-                        <Link href="" ><button>Login</button></Link>
+                        <Link href="" ><button className={styles.button}>Login</button></Link>
                     </li>
                 </ul>
             </nav>
