@@ -38,9 +38,14 @@ export default function Login(): JSX.Element {
         }
     }
 
-    function submitToForm(e: React.FormEvent) {
+    async function submitToForm(e: React.FormEvent) {
         e.preventDefault();
-        console.log(getDataLogin());
+        const response = await getDataLogin();
+
+        if(response) {
+            const token = await response.text();
+            console.log(token);
+        }
     }
 
 
