@@ -1,7 +1,9 @@
 'use client'
 
-import { ChangeEvent, JSX, useEffect, useState } from "react";
+import { ChangeEvent, JSX, useContext, useEffect, useState } from "react";
 import styles from './loginPage.module.css';
+import { redirect } from "next/navigation";
+import { AuthContext } from "@/contexts/AuthProvider";
 
 interface IUser {
     userName: string,
@@ -13,6 +15,7 @@ export default function Login(): JSX.Element {
 
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const { login } = useContext(AuthContext);
 
     async function getDataLogin() {
 
@@ -30,8 +33,6 @@ export default function Login(): JSX.Element {
                 body: JSON.stringify(userData)
             })
 
-            console.log("Deu certo");
-
             return response;
         } catch (err) {
             console.log(`Deu o seguinte erro: ${err}`);
@@ -42,9 +43,25 @@ export default function Login(): JSX.Element {
         e.preventDefault();
         const response = await getDataLogin();
 
-        if(response) {
+        if (!response) {
+            console.log("Erro na requisição");
+            return;
+        }
+
+        if(response.ok) {
             const token = await response.text();
-            console.log(token);
+
+            if(token) {
+                login(token);
+                redirect("/home");
+            }
+            else {
+                console.log("Token expirado ou inválido");
+            }
+        }
+        else {
+            const errorData = await response.json();
+            console.log("Erro no login:", errorData.message);
         }
     }
 
