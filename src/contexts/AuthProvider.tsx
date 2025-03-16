@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createContext, ReactNode, useEffect, useState } from "react"
+import Cookies from "js-cookie";
 
 interface AuthProps {
     validToken: boolean | null,
@@ -16,24 +17,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [validToken, setValidToken] = useState<boolean | null>(null);
 
     useEffect(() => {
-        async function fetchToken() {
-            const token = document.cookie
-                .split('; ')
-                .find((row) => row.startsWith('token='))
-                ?.split('=')[1];
-                
-            setValidToken(!!token);
-        }
-        fetchToken();
+        const token = Cookies.get("token");
+
+        setValidToken(!!token);
+        
     }, []);
 
     function login(token: string): void {
-        document.cookie = `token=${token}; path=/; max-age=1800`;
+        Cookies.set("token", token, { expires: 1 / 48, path: "/" })
         setValidToken(true);
     };
 
     function logout(): void {
-        document.cookie = "token=; path=/; max-age=0";
+        Cookies.remove("token");
         setValidToken(false);
         redirect("/login");
     }
