@@ -1,6 +1,6 @@
 'use client'
 
-import { ChangeEvent, JSX, useContext, useEffect, useState } from "react";
+import { ChangeEvent, JSX, useContext, useState } from "react";
 import styles from './loginPage.module.css';
 import { redirect } from "next/navigation";
 import { AuthContext } from "@/contexts/AuthProvider";
@@ -53,7 +53,7 @@ export default function Login(): JSX.Element {
 
             if(token) {
                 login(token);
-                redirect("/home");
+                redirect("/dashboard");
             }
             else {
                 console.log("Token expirado ou inválido");

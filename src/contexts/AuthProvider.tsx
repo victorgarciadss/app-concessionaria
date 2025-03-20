@@ -1,6 +1,5 @@
 'use client'
 
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createContext, ReactNode, useEffect, useState } from "react"
 import Cookies from "js-cookie";

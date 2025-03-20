@@ -1,0 +1,23 @@
+.sidebar {
+    display: flex;
+    height: calc(100vh - 80px);
+    max-width: 18rem;
+    margin-right: 2rem;
+    background-color: var(--second);
+    padding: 2rem;
+}
+
+.sidebar_list {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.element_list {
+    list-style: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+}
