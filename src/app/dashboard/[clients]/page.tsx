@@ -1,15 +1,25 @@
 
+import Header from "@/components/header/Header";
+import Sidebar from "@/components/sidebar/Sidebar";
 import CustomTable from "@/components/table/CustomTable";
 import { cookies } from "next/headers";
 
-async function getClients() {
+interface ClientsProps {
+    id: bigint,
+    name: string,
+    cpf: string,
+    adress: string,
+    age: number
+};
+
+async function getClients(): Promise<ClientsProps[]> {
     try {
         const cookieStore = await cookies();
         const token = cookieStore.get("token")?.value;
         
         const response = await fetch("http://localhost:8080/clientes/paginado", {
             headers: {
-                "Authorization": `Bearer ${token}`, // Substitua pelo token real
+                "Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json"
             },
             cache: "no-store",
@@ -21,10 +31,8 @@ async function getClients() {
 
         return response.json();
 
-
     } catch (error) {
-        console.error("Erro ao buscar clientes:", error);
-        return [];
+        throw new Error(`Erro ao buscar clientes:", ${error}`);
     }
 }
 
@@ -41,9 +49,13 @@ export default async function Clients() {
     const clients = await getClients();
     console.log(clients)
 
+    const rows: ClientsProps[] = clients;
+
     return (
         <main>
-            {/* <CustomTable columns={columns} /> */}
+            <Header />
+            <Sidebar />
+            <CustomTable columns={columns} rows={rows} />
         </main>
     )
 }
