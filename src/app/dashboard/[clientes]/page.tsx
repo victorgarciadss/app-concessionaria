@@ -58,7 +58,7 @@ export default async function Clients() {
             <main className={styles.main_container}>
 
                 <Sidebar />
-                <CustomTable columns={columns} rows={rows} />
+                <CustomTable columns={columns} />
             </main>
         </>
     )

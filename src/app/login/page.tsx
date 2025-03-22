@@ -18,7 +18,6 @@ export default function Login(): JSX.Element {
     const { login } = useContext(AuthContext);
 
     async function getDataLogin() {
-
         const userData: IUser = {
             userName: username,
             password: password
@@ -53,7 +52,7 @@ export default function Login(): JSX.Element {
 
             if(token) {
                 login(token);
-                redirect("/dashboard/clients");
+                redirect("/dashboard/clientes");
             }
             else {
                 console.log("Token expirado ou inválido");
