@@ -1,8 +1,9 @@
-
 import Header from "@/components/header/Header";
 import Sidebar from "@/components/sidebar/Sidebar";
 import CustomTable from "@/components/table/CustomTable";
 import { cookies } from "next/headers";
+
+import styles from "./clients.module.css";
 
 interface ClientsProps {
     id: bigint,
@@ -16,7 +17,7 @@ async function getClients(): Promise<ClientsProps[]> {
     try {
         const cookieStore = await cookies();
         const token = cookieStore.get("token")?.value;
-        
+
         const response = await fetch("http://localhost:8080/clientes/paginado", {
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -52,10 +53,13 @@ export default async function Clients() {
     const rows: ClientsProps[] = clients;
 
     return (
-        <main>
+        <>
             <Header />
-            <Sidebar />
-            <CustomTable columns={columns} rows={rows} />
-        </main>
+            <main className={styles.main_container}>
+
+                <Sidebar />
+                <CustomTable columns={columns} rows={rows} />
+            </main>
+        </>
     )
 }

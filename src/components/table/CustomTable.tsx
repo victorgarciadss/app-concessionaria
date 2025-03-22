@@ -25,7 +25,6 @@ interface Data {
 };
 
 
-
 interface CustomTableProps {
   columns: Column[],
   rows: Data[]
@@ -46,7 +45,7 @@ export default function CustomTable({ columns, rows }: CustomTableProps) {
     };
   
     return (
-      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <Paper sx={{ width: '70%', overflow: 'hidden', margin: "2rem" }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>

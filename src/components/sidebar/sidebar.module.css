@@ -13,8 +13,13 @@
     gap: 3rem;
 }
 
-.element_list {
+.sidebar_list li {
     list-style: none;
+}
+
+.element_list {
+    
+    text-decoration: none;
     color: white;
     cursor: pointer;
     display: flex;

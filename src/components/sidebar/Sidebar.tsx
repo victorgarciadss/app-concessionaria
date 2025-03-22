@@ -9,24 +9,30 @@ export default function Sidebar(): JSX.Element {
     return (
         <nav className={styles.sidebar}>
             <ul className={styles.sidebar_list}>
-                <Link href={"/dashboard/cars"}>
-                    <li className={styles.element_list}>
+                
+                <li>
+                    <Link href={"/dashboard/cars"} className={styles.element_list}>
                         <IoCarSport className={styles.icon} />
                         <span>Carros</span>
-                    </li>
-                </Link>
-                <Link href={"/dashboard/clients"}>
-                    <li className={styles.element_list}>
+                    </Link>
+                </li>
+                
+                
+                <li>
+                    <Link href={"/dashboard/clients"} className={styles.element_list}>
                         <BsPeopleFill className={styles.icon} />
                         <span>Clientes</span>
-                    </li>
-                </Link>
-                <Link href={"/dashboard/sales"}>
-                    <li className={styles.element_list}>
+                    </Link>
+                </li>
+                
+                
+                <li >
+                    <Link href={"/dashboard/sales"} className={styles.element_list}>
                         <BsGraphUpArrow className={styles.icon} />
                         <span>Vendas realizadas</span>
-                    </li>
-                </Link>
+                    </Link>
+                </li>
+                
                 
             </ul>
         </nav>

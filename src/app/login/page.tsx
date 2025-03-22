@@ -53,7 +53,7 @@ export default function Login(): JSX.Element {
 
             if(token) {
                 login(token);
-                redirect("/dashboard");
+                redirect("/dashboard/clients");
             }
             else {
                 console.log("Token expirado ou inválido");
