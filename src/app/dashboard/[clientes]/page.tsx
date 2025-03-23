@@ -13,29 +13,29 @@ interface ClientsProps {
     age: number
 };
 
-async function getClients(): Promise<ClientsProps[]> {
-    try {
-        const cookieStore = await cookies();
-        const token = cookieStore.get("token")?.value;
+// async function getClients(): Promise<ClientsProps[]> {
+//     try {
+//         const cookieStore = await cookies();
+//         const token = cookieStore.get("token")?.value;
 
-        const response = await fetch("http://localhost:8080/clientes/paginado", {
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
-            },
-            cache: "no-store",
-        });
+//         const response = await fetch("http://localhost:8080/clientes/paginado", {
+//             headers: {
+//                 "Authorization": `Bearer ${token}`,
+//                 "Content-Type": "application/json"
+//             },
+//             cache: "no-store",
+//         });
 
-        if (!response.ok) {
-            throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
-        }
+//         if (!response.ok) {
+//             throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
+//         }
 
-        return response.json();
+//         return response.json();
 
-    } catch (error) {
-        throw new Error(`Erro ao buscar clientes:", ${error}`);
-    }
-}
+//     } catch (error) {
+//         throw new Error(`Erro ao buscar clientes:", ${error}`);
+//     }
+// }
 
 const columns = [
     { id: "id", label: "id" },
@@ -46,11 +46,6 @@ const columns = [
 ]
 
 export default async function Clients() {
-
-    const clients = await getClients();
-    console.log(clients)
-
-    const rows: ClientsProps[] = clients;
 
     return (
         <>

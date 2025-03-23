@@ -37,7 +37,6 @@ interface CustomTableProps {
 export default function CustomTable({ columns }: CustomTableProps) {
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-  // const [isLoading, setIsLoading] = useState<boolean>(false);
   const [rows, setRows] = useState<Data[]>([]);
   const [totalCount, setTotalCount] = useState<number>(0);
 
@@ -47,21 +46,17 @@ export default function CustomTable({ columns }: CustomTableProps) {
 
   useEffect(() => {
     async function fetchData() {
-      // setIsLoading(true);
       const token = Cookies.get("token");
 
       if (group && token && typeof group === "string") {
         try {
           const data = await fetchClientsPerPage(group, page, rowsPerPage, token);
-          console.log(data);
-          setRows(data);
-          console.log(data.length);
-          setTotalCount(data.length);
+          setRows(data.contentPage);
+          setTotalCount(data.totalElements);
         } catch (error) {
           console.error("Erro ao buscar os clientes:", error);
         }
       }
-      // setIsLoading(false);
     };
 
     fetchData();
@@ -112,7 +107,7 @@ export default function CustomTable({ columns }: CustomTableProps) {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25, 100]}
         component="div"
-        count={-1}
+        count={totalCount}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
