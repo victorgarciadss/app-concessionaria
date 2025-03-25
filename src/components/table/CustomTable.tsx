@@ -2,6 +2,11 @@
 
 import { useEffect, useState } from 'react';
 
+import Cookies from "js-cookie";
+import { fetchClientsPerPage } from '@/services/requsts';
+import { useParams } from 'next/navigation';
+import { Column } from '@/utils/interfaces';
+
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,14 +16,6 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
-import Cookies from "js-cookie";
-import { fetchClientsPerPage } from '@/services/requsts';
-import { useParams } from 'next/navigation';
-
-interface Column {
-  id: string,
-  label: string
-};
 
 interface Data {
   id: bigint,
