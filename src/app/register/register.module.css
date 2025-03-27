@@ -1,0 +1,44 @@
+.main_component {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background);
+}
+
+.title {
+    font-size: 1.5rem;
+    margin: 2rem 0;
+}
+
+.form_container {
+    background-color: var(--accent);
+    color: white;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.info_content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.info_content input {
+    width: 22rem;
+    height: 40px;
+}
+
+.info_content > select {
+    width: 22rem;
+    height: 40px;
+}
+
+.button {
+    height: 32px;
+    cursor: pointer;
+    margin: 2rem 0;
+}
