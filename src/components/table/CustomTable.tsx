@@ -70,7 +70,7 @@ export default function CustomTable({ columns }: CustomTableProps) {
 
   return (
     <Paper sx={{ width: '70%', overflow: 'hidden', margin: "2rem", maxHeight: 600 }}>
-      <TableContainer sx={{ maxHeight: 400 }}>
+      <TableContainer sx={{ maxHeight: 500 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>

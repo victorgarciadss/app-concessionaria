@@ -24,7 +24,7 @@ export default function Sidebar(): JSX.Element {
                     </Link>
                 </li>
                 
-                <li >
+                <li>
                     <Link href={"/dashboard/sales"} className={styles.element_list}>
                         <BsGraphUpArrow className={styles.icon} />
                         <span>Vendas realizadas</span>
