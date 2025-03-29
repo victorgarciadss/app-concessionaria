@@ -13,7 +13,7 @@ export default function Register(): JSX.Element {
         const token = Cookies.get("token");
 
         try {
-            console.log(role);
+            
             const response = await fetch("http://localhost:8080/auth/cadastro", {
                 method: "POST",
                 headers: {

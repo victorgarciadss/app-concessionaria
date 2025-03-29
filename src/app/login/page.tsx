@@ -48,10 +48,11 @@ export default function Login(): JSX.Element {
         }
 
         if(response.ok) {
-            const token = await response.text();
+            const loginDataResponse = await response.json();
+            const { token, role } = loginDataResponse;
 
             if(token) {
-                login(token);
+                login(token, role);
                 redirect("/dashboard/clientes");
             }
             else {

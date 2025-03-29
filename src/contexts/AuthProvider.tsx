@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 
 interface AuthProps {
     validToken: boolean | null,
-    login: (token: string) => void,
+    login: (token: string, role: string) => void,
     logout: () => void
 }
 
@@ -22,13 +22,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         
     }, []);
 
-    function login(token: string): void {
-        Cookies.set("token", token, { expires: 1 / 48, path: "/" })
+    function login(token: string, role: string): void {
+        Cookies.set("token", token, { expires: 1 / 48, path: "/" });
+        Cookies.set("role", role);
         setValidToken(true);
     };
 
     function logout(): void {
         Cookies.remove("token");
+        Cookies.remove("role");
         setValidToken(false);
         redirect("/login");
     }

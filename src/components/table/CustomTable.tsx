@@ -34,7 +34,7 @@ interface CustomTableProps {
 export default function CustomTable({ columns }: CustomTableProps) {
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-  const [rows, setRows] = useState<Data[]>([]);
+  const [rows, setRows] = useState<Data[]>([]); // alterar lógica aqui ou na interface Data para aceitar não só clientes
   const [totalCount, setTotalCount] = useState<number>(0);
 
   const params = useParams();
@@ -47,11 +47,11 @@ export default function CustomTable({ columns }: CustomTableProps) {
 
       if (group && token && typeof group === "string") {
         try {
-          const data = await fetchClientsPerPage(group, page, rowsPerPage, token);
+          const data = await fetchClientsPerPage(group, page, rowsPerPage, token); // ajustar nome para não ser só para clientes
           setRows(data.contentPage);
           setTotalCount(data.totalElements);
         } catch (error) {
-          console.error("Erro ao buscar os clientes:", error);
+          console.error("Erro ao buscar os dados:", error);
         }
       }
     };
