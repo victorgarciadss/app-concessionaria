@@ -28,7 +28,8 @@ export default function Register(): JSX.Element {
             });
 
             if(!response.ok) {
-                throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
+                const errorResponse = await response.json();
+                throw new Error(errorResponse.message || `Erro na requisição: ${response.status} ${response.statusText}`);
             }
 
             const responseJson = await response.json();
@@ -36,8 +37,8 @@ export default function Register(): JSX.Element {
             // redirect("/"); // alterar após criar uma listagem de funcionários para redirecionar para lá
             
 
-        } catch(err) {
-            throw new Error(`Erro ao tentar o cadastro", ${err}`);
+        } catch(err: any) {
+            throw new Error(`Erro ao tentar o cadastro: " ${err}`);
         }
     }
 
