@@ -2,8 +2,7 @@ import Header from "@/components/header/Header";
 import Sidebar from "@/components/sidebar/Sidebar";
 import CustomTable from "@/components/table/CustomTable";
 
-import styles from "./clients.module.css";
-
+import styles from "../dashboard.module.css";
 
 
 const columns = [

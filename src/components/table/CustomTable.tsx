@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 
 import Cookies from "js-cookie";
-import { fetchClientsPerPage } from '@/services/requsts';
-import { useParams } from 'next/navigation';
+import { fetchClientsPerPage, fetchEmployeesPerPage } from '@/services/requsts';
+import { useParams, usePathname } from 'next/navigation';
 import { Column } from '@/utils/interfaces';
 
 import Paper from '@mui/material/Paper';
@@ -34,11 +34,12 @@ interface CustomTableProps {
 export default function CustomTable({ columns }: CustomTableProps) {
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-  const [rows, setRows] = useState<Data[]>([]); // alterar lógica aqui ou na interface Data para aceitar não só clientes
+  const [rows, setRows] = useState<Data[]>([]); // verificar possivel inconsistencia no id de rows devido a tipagem ser para clientes
   const [totalCount, setTotalCount] = useState<number>(0);
 
-  const params = useParams();
-  const group = Object.values(params)[0];
+  const pathname = usePathname();
+  const group = pathname.split("/")[2];
+
 
 
   useEffect(() => {
@@ -47,7 +48,13 @@ export default function CustomTable({ columns }: CustomTableProps) {
 
       if (group && token && typeof group === "string") {
         try {
-          const data = await fetchClientsPerPage(group, page, rowsPerPage, token); // ajustar nome para não ser só para clientes
+          let data;
+          if(group === "clientes") {
+            data = await fetchClientsPerPage(page, rowsPerPage, token);
+          }
+          else if(group === "funcionarios") {
+            data = await fetchEmployeesPerPage(page, rowsPerPage, token);
+          }
           setRows(data.contentPage);
           setTotalCount(data.totalElements);
         } catch (error) {
