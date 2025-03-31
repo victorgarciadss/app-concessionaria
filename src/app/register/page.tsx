@@ -34,7 +34,7 @@ export default function Register(): JSX.Element {
 
             const responseJson = await response.json();
             console.log(responseJson);
-            // redirect("/"); // alterar após criar uma listagem de funcionários para redirecionar para lá
+            redirect("/dashboard/funcionarios");
             
 
         } catch(err: any) {

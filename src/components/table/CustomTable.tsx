@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import Cookies from "js-cookie";
 import { fetchClientsPerPage, fetchEmployeesPerPage } from '@/services/requsts';
@@ -15,15 +15,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { Client, Employee, PersonContext } from '@/contexts/PersonContext';
 
-
-interface Data {
-  id: bigint,
-  name: string,
-  cpf: string,
-  adress: string,
-  age: number
-};
 
 
 interface CustomTableProps {
@@ -32,9 +25,11 @@ interface CustomTableProps {
 
 
 export default function CustomTable({ columns }: CustomTableProps) {
+
+ const { employees, clients, setEmployeesData, setClientsData } = useContext(PersonContext)
+
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-  const [rows, setRows] = useState<Data[]>([]); // verificar possivel inconsistencia no id de rows devido a tipagem ser para clientes
   const [totalCount, setTotalCount] = useState<number>(0);
 
   const pathname = usePathname();
@@ -51,11 +46,12 @@ export default function CustomTable({ columns }: CustomTableProps) {
           let data;
           if(group === "clientes") {
             data = await fetchClientsPerPage(page, rowsPerPage, token);
+            setClientsData(data.contentPage);
           }
           else if(group === "funcionarios") {
             data = await fetchEmployeesPerPage(page, rowsPerPage, token);
+            setEmployeesData(data.contentPage);
           }
-          setRows(data.contentPage);
           setTotalCount(data.totalElements);
         } catch (error) {
           console.error("Erro ao buscar os dados:", error);
@@ -76,8 +72,8 @@ export default function CustomTable({ columns }: CustomTableProps) {
   };
 
   return (
-    <Paper sx={{ width: '70%', overflow: 'hidden', margin: "2rem", maxHeight: 600 }}>
-      <TableContainer sx={{ maxHeight: 500 }}>
+    <Paper sx={{ width: '70%', overflow: 'hidden', margin: "2rem", maxHeight: 500 }}>
+      <TableContainer sx={{ maxHeight: 400 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -91,20 +87,24 @@ export default function CustomTable({ columns }: CustomTableProps) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                    {columns.map((column) => {
-                      const value = row[column.id as keyof Data];
-                      return (
+            {group === "clientes" && clients && clients.map((row) => (
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                    {columns.map((column) => (
                         <TableCell key={column.id}>
-                          {value}
+                            {(row as any)[column.id as keyof Client]}
                         </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
+                    ))}
+                </TableRow>
+            ))}
+            {group === "funcionarios" && employees && employees.map((row) => (
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                    {columns.map((column) => (
+                        <TableCell key={column.id}>
+                            {(row as any)[column.id as keyof Employee]}
+                        </TableCell>
+                    ))}
+                </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>

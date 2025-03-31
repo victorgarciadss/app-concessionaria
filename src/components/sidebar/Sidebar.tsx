@@ -18,7 +18,7 @@ export default function Sidebar(): JSX.Element {
                 </li>
                 
                 <li>
-                    <Link href={"/dashboard/clients"} className={styles.element_list}>
+                    <Link href={"/dashboard/clientes"} className={styles.element_list}>
                         <BsPeopleFill className={styles.icon} />
                         <span>Clientes</span>
                     </Link>
